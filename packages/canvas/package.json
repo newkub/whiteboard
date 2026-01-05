@@ -1,0 +1,26 @@
+{
+  "name": "canvas",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./pkg/canvas.js",
+  "types": "./pkg/canvas.d.ts",
+  "exports": {
+    ".": {
+      "types": "./pkg/canvas.d.ts",
+      "default": "./pkg/canvas.js"
+    }
+  },
+  "files": [
+    "pkg"
+  ],
+  "scripts": {
+    "build": "bun ./scripts/run-wasm-pack.mjs build . --dev --target web --out-dir pkg",
+    "build:release": "bun ./scripts/run-wasm-pack.mjs build . --release --target web --out-dir pkg",
+    "format": "cargo fmt --all",
+    "lint": "cargo clippy --target wasm32-unknown-unknown --all-targets --all-features -- -D warnings",
+    "test": "cargo test --all-features",
+    "test:nextest": "cargo nextest run --all-features --verbose",
+    "verify": "bun run format && bun run lint && bun run test:nextest"
+  }
+}
